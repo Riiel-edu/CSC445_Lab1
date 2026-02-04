@@ -15,45 +15,44 @@ public class Main {
             int c = pbReader.read();
 
             while(c != -1 && c != 65535) {
-                if(Character.isLetter(c)) {
+                if (Character.isLetter(c)) {
 
-                    while(Character.isLetter(c)) {
+                    while (Character.isLetter(c)) {
                         sb.append((char) c);
                         c = pbReader.read();
                     }
 
+                    pbReader.unread(c);
                     System.out.println((char) c + " String buffer: " + sb.toString());
                     sb.delete(0, sb.length());
-                } else if(Character.isDigit(c)) {
+                } else if (Character.isDigit(c)) {
 
-                    while(Character.isDigit(c)) {
+                    while (Character.isDigit(c)) {
                         sb.append((char) c);
                         c = pbReader.read();
                     }
 
+                    pbReader.unread(c);
                     System.out.println("  Number buffer: " + sb.toString());
                     sb.delete(0, sb.length());
                 } else if (c == ':') {
                     sb.append((char) c);
                     System.out.println((char) c + " Colon buffer: " + sb.toString());
                     sb.delete(0, sb.length());
-                    c = pbReader.read();
                 } else if (c == ',') {
                     sb.append((char) c);
                     System.out.println((char) c + " Comma buffer: " + sb.toString());
                     sb.delete(0, sb.length());
-                    c = pbReader.read();
                 } else if (c == '"') {
                     sb.append((char) c);
                     System.out.println((char) c + " Double quote buffer: " + sb.toString());
                     sb.delete(0, sb.length());
-                    c = pbReader.read();
-                } else if (c == ' '){
+                } else if (c == ' ') {
                     sb.append((char) c);
                     System.out.println((char) c + " Space buffer: " + sb.toString());
                     sb.delete(0, sb.length());
-                    c = pbReader.read();
                 }
+                c = pbReader.read();
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
